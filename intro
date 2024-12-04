@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #000;
+    }
+
+    #intro {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: #fff;
+      z-index: 1;
+    }
+
+    h1 {
+      font-size: 38px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    h2 {
+      font-size: 14px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .recomn {
+      font-size: 10px;
+      max-block-size: 60px;
+    }
+
+    footer {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      color: #fff;
+      font-size: 16px;
+      z-index: 1;
+      opacity: 0.5;
+    }
+
+    .shapes {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .shape1,
+    .shape2,
+    .shape3 {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      animation-duration: 2s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+
+    .shape1 {
+      top: 20%;
+      left: 10%;
+      animation-name: shape1Anim;
+    }
+
+    .shape2 {
+      top: 70%;
+      right: 20%;
+      animation-name: shape2Anim;
+    }
+
+    .shape3 {
+      bottom: 30%;
+      left: 40%;
+      animation-name: shape3Anim;
+    }
+
+    @keyframes shape1Anim {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.5);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    @keyframes shape2Anim {
+      0% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-50px);
+      }
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes shape3Anim {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.2);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 36px;
+      }
+      h2 {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="intro">
+    </br>
+    <h1>SPLAY</h1>
+    </br></br></br></br></br></br></br></br></br>
+  </div>
+
+  <footer>
+    <p>V-SATELITAL</p>
+    <p id="recommendation" class="recomn"></p>
+  </footer>
+
+  <div class="shapes">
+    <div class="shape1"></div>
+    <div class="shape2"></div>
+    <div class="shape3"></div>
+  </div>
+    <script> 
+    // Utilizamos la librería GSAP para crear la animación
+    gsap.from("#intro", { duration: 2, opacity: 0, scale: 0.5, ease: "power4.out" });
+
+    // Redirección automática después de 7 segundos
+    setTimeout(function() {
+      window.location.href = "go:veri";
+    }, 17000);
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  var recommendation = document.getElementById("recommendation");
+
+  var recommendations = [
+    "Splay + Internet = Entretenimiento sin límites.", 
+    "Descubre, disfruta, nunca te aburras.", 
+    "Splay es gratis, ¡no compres cuentas de terceros!", 
+    "Tu diversión, cerca de nuestros satélites.", 
+    "¿Por qué pagar tanto por TV? Elige Splay.",
+    "Descarga Splay, sumérgete en la diversión.",
+    "Tu boleto al entretenimiento: Splay, descárgalo y disfruta.", 
+    "Tu pasaporte al increíble mundo del entretenimiento: Splay.", 
+    "La mejor opción para el entretenimiento: Splay.",
+    "Sumérgete en el mundo del entretenimiento con Splay.",
+    "Un universo infinito de emociones y risas.",
+    "Explora el vasto catálogo de Splay y encuentra tu nueva adicción.",
+    "Donde los sueños se convierten en realidad. ¡Dale play!",
+    "El secreto mejor guardado para disfrutar al máximo.",
+    "Tu compañero fiel en la búsqueda del entretenimiento perfecto.",
+    "Tu portal mágico al entretenimiento sin límites.",
+    "¡La alianza perfecta! Splay y Amazon Studios juntos para ofrecerte lo mejor del entretenimiento.",
+"Descubre el poder de la alianza entre Splay y Amazon Studios. Películas y series exclusivas al alcance de tus manos.",
+"Splay y Amazon Studios: Una colaboración épica de contenido. Prepárate para disfrutar de producciones originales y emocionantes."
+  ];
+
+  var shownRecommendations = [];
+
+  function getRandomRecommendation() {
+    if (shownRecommendations.length === recommendations.length) {
+      shownRecommendations = [];
+    }
+
+    var randomIndex = Math.floor(Math.random() * recommendations.length);
+    while (shownRecommendations.includes(randomIndex)) {
+      randomIndex = Math.floor(Math.random() * recommendations.length);
+    }
+
+    shownRecommendations.push(randomIndex);
+    return recommendations[randomIndex];
+  }
+
+  function changeRecommendation() {
+    recommendation.classList.remove("animate__fadeInUp");
+    recommendation.classList.add("animate__fadeOutDown");
+
+    setTimeout(function() {
+      var newRecommendation = getRandomRecommendation();
+      recommendation.textContent = newRecommendation;
+      recommendation.classList.remove("animate__fadeOutDown");
+      recommendation.classList.add("animate__fadeInUp");
+    }, 2000); // Cambia el tiempo (en milisegundos) según la duración deseada de la animación
+  }
+
+  changeRecommendation();
+  setInterval(changeRecommendation, 5000); // Cambia el tiempo (en milisegundos) según el intervalo deseado
+});
+    </script>
+</body>
+</html>
